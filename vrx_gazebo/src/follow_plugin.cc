@@ -156,7 +156,28 @@ void FollowPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
 
   // Parse the optional <loop_forever> element.
   if (_sdf->HasElement("loop_forever"))
-    this->loopForever = true;
+    this->loopForever = _sdf->Get<bool>("loop_forever");
+
+  if (_sdf->HasElement("force"))
+    this->forceToApply = _sdf->Get<double>("force");
+
+  if (_sdf->HasElement("torque"))
+    this->torqueToApply = _sdf->Get<double>("torque");
+
+  if (_sdf->HasElement("heading_gain"))
+    this->headingGain = _sdf->Get<double>("heading_gain");
+
+  if (_sdf->HasElement("yaw_rate_gain"))
+    this->yawRateGain = _sdf->Get<double>("yaw_rate_gain");
+
+  if (_sdf->HasElement("forward_bearing_limit"))
+  {
+    this->forwardBearingLimit =
+      _sdf->Get<double>("forward_bearing_limit");
+  }
+
+  if (_sdf->HasElement("range_tolerance"))
+    this->rangeGoal = _sdf->Get<double>("range_tolerance");
 
   // Parse the optional <markers> element.
   if (_sdf->HasElement("markers"))
@@ -201,25 +222,24 @@ void FollowPlugin::Update()
   if (this->localWaypoints.empty())
     return;
 
-  // Direction vector to the goal from the model.
+  // Direction vector to the goal from the model. Waypoints describe a path
+  // on the water surface, so heave must not affect waypoint arrival.
+#if GAZEBO_MAJOR_VERSION >= 8
+  const auto pose = this->model->WorldPose();
+#else
+  const auto pose = this->model->GetWorldPose().Ign();
+#endif
   ignition::math::Vector3d direction =
 #if GAZEBO_MAJOR_VERSION >= 8
-    this->nextGoal - this->model->WorldPose().Pos();
+    this->nextGoal - pose.Pos();
 #else
-    this->nextGoal - this->model->GetWorldPose().Ign().Pos();
+    this->nextGoal - pose.Pos();
 #endif
+  direction.Z(0);
 
-  // Direction vector in the local frame of the model.
-  ignition::math::Vector3d directionLocalFrame =
-#if GAZEBO_MAJOR_VERSION >= 8
-    this->model->WorldPose().Rot().RotateVectorReverse(direction);
-#else
-    this->model->GetWorldPose().Ign().Rot().RotateVectorReverse(direction);
-#endif
-
-  double range = directionLocalFrame.Length();
-  ignition::math::Angle bearing(
-    atan2(directionLocalFrame.Y(), directionLocalFrame.X()));
+  const double range = direction.Length();
+  ignition::math::Angle bearing(atan2(direction.Y(), direction.X()) -
+    pose.Rot().Yaw());
   bearing.Normalize();
 
   // Waypoint reached!
@@ -249,7 +269,32 @@ void FollowPlugin::Update()
     return;
   }
 
-  // Move commands. The vehicle always move forward (X direction).
+  // A proportional heading controller with yaw-rate damping prevents larger
+  // vessels from overshooting the desired heading and spinning continuously.
+  if (this->headingGain > 0)
+  {
+    const double bearingRadians = bearing.Radian();
+    const double bearingDegrees = std::abs(bearing.Degree());
+    if (bearingDegrees <= this->forwardBearingLimit)
+    {
+      const double forceScale = std::max(0.0, std::cos(bearingRadians));
+      this->link->AddLinkForce({this->forceToApply * forceScale, 0, 0});
+    }
+
+#if GAZEBO_MAJOR_VERSION >= 8
+    const double yawRate = this->link->WorldAngularVel().Z();
+#else
+    const double yawRate = this->link->GetWorldAngularVel().Ign().Z();
+#endif
+    double torque = this->headingGain * bearingRadians -
+      this->yawRateGain * yawRate;
+    torque = std::max(-this->torqueToApply,
+      std::min(this->torqueToApply, torque));
+    this->link->AddRelativeTorque({0, 0, torque});
+    return;
+  }
+
+  // Legacy control used by existing animal buoy models.
   this->link->AddLinkForce({this->forceToApply, 0, 0});
 
   if (bearing.Degree() > this->bearingGoal)

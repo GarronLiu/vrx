@@ -18,6 +18,7 @@
 #ifndef VRX_GAZEBO_FOLLOW_PLUGIN_HH_
 #define VRX_GAZEBO_FOLLOW_PLUGIN_HH_
 
+#include <algorithm>
 #include <vector>
 #include <cmath>
 #include <gazebo/gazebo.hh>
@@ -48,6 +49,16 @@ namespace gazebo
 ///                 circular pattern. If false, the model will stop when the
 ///                 last waypoint is reached. Note, that if the vehicle moves,
 ///                 it will still try to reach the very last waypoint.
+/// <force>: Forward force in newtons. Default: 10.
+/// <torque>: Maximum yaw torque in newton-metres. Default: 1.
+/// <heading_gain>: Proportional heading gain. When greater than zero, enables
+///                 stabilized heading control. Default: 0 (legacy control).
+/// <yaw_rate_gain>: Yaw-rate damping gain used by stabilized heading control.
+///                  Default: 0.
+/// <forward_bearing_limit>: Do not apply forward force when the absolute
+///                          heading error exceeds this angle in degrees.
+///                          Default: 90.
+/// <range_tolerance>: XY distance at which a waypoint is reached. Default: 0.5.
 /// <markers>: Enable visualization markers. Check the WaypointMarkers class for
 ///            SDF documentation.
 /// <waypoints>: Element specifying the set of waypoints that the
@@ -123,6 +134,16 @@ class FollowPlugin : public ModelPlugin
 
   /// \brief Torque to apply to the model to align it with the next goal.
   private: double torqueToApply = 1;
+
+  /// \brief Proportional gain for stabilized heading control.
+  private: double headingGain = 0;
+
+  /// \brief Yaw-rate damping gain for stabilized heading control.
+  private: double yawRateGain = 0;
+
+  /// \brief Largest bearing error at which forward force is applied.
+  /// Units are in degrees.
+  private: double forwardBearingLimit = 90;
 
   /// \brief When the model is at this distance or closer we won't try to move.
   /// Units are in meters.

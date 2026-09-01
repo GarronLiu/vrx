@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="obstacle_ship">
+    <static>false</static>
+
+    <link name="link">
+      <inertial>
+        <!-- Keep the center of mass low to improve roll and pitch stability. -->
+        <pose>0 0 -0.45 0 0 0</pose>
+        <mass>20</mass>
+        <inertia>
+          <!-- Inertia of the two-times scaled collision hull. -->
+          <ixx>26.784</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>57.192</iyy>
+          <iyz>0</iyz>
+          <izz>70.208</izz>
+        </inertia>
+      </inertial>
+
+      <!--
+        Two-times inflated collision box. Gazebo LiDAR rays use collision
+        geometry, so this makes the obstacle easier to detect at a distance.
+      -->
+      <collision name="obstacle_ship_collision">
+        <pose>0 0 0.416 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>5.494 3.456 2.032</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="obstacle_ship_visual">
+        <!-- Center the two-times scaled DAE bounds on the model origin. -->
+        <pose>-0.748 -0.728 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://obstacle_ship/meshes/ROS_SHIP.dae</uri>
+            <scale>2 2 2</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <plugin name="ObstacleShipBuoyancyPlugin" filename="libbuoyancy_gazebo_plugin.so">
+      <wave_model>ocean_waves</wave_model>
+      <fluid_density>1000</fluid_density>
+      <fluid_level>0.0</fluid_level>
+      <!-- Stronger damping suppresses wave-induced heave and angular motion. -->
+      <!-- Lower translational drag for a higher cruising speed. -->
+      <linear_drag>25.0</linear_drag>
+      <angular_drag>20.0</angular_drag>
+
+      <!--
+        Distribute buoyancy around the hull. The four offset buoyancy volumes
+        generate restoring moments against both roll and pitch.
+      -->
+      <buoyancy name="obstacle_ship_buoyancy_front_port">
+        <link_name>link</link_name>
+        <pose>1.8 1.0 0.1 0 0 0</pose>
+        <geometry>
+          <sphere><radius>0.25</radius></sphere>
+        </geometry>
+      </buoyancy>
+      <buoyancy name="obstacle_ship_buoyancy_front_starboard">
+        <link_name>link</link_name>
+        <pose>1.8 -1.0 0.1 0 0 0</pose>
+        <geometry>
+          <sphere><radius>0.25</radius></sphere>
+        </geometry>
+      </buoyancy>
+      <buoyancy name="obstacle_ship_buoyancy_rear_port">
+        <link_name>link</link_name>
+        <pose>-1.8 1.0 0.1 0 0 0</pose>
+        <geometry>
+          <sphere><radius>0.25</radius></sphere>
+        </geometry>
+      </buoyancy>
+      <buoyancy name="obstacle_ship_buoyancy_rear_starboard">
+        <link_name>link</link_name>
+        <pose>-1.8 -1.0 0.1 0 0 0</pose>
+        <geometry>
+          <sphere><radius>0.25</radius></sphere>
+        </geometry>
+      </buoyancy>
+    </plugin>
+
+    <plugin name="ObstacleShipFollowPlugin" filename="libfollow_plugin.so">
+      <link_name>link</link_name>
+      <loop_forever>true</loop_forever>
+      <!-- Increase forward force while retaining the stabilized heading control. -->
+      <force>300</force>
+      <torque>80</torque>
+      <heading_gain>10</heading_gain>
+      <yaw_rate_gain>12</yaw_rate_gain>
+      <forward_bearing_limit>50</forward_bearing_limit>
+      <range_tolerance>1.0</range_tolerance>
+      <waypoints>
+        <waypoint>-546 211</waypoint>
+        <waypoint>-545 238</waypoint>
+      </waypoints>
+    </plugin>
+  </model>
+</sdf>

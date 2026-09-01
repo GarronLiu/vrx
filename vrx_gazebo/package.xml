@@ -24,6 +24,7 @@
   <depend>roscpp</depend>
   <depend>rospy</depend>
   <depend>std_msgs</depend>
+  <exec_depend>teleop_twist_keyboard</exec_depend>
   <depend>wamv_gazebo</depend>
   <depend>wave_gazebo</depend>
   <depend>xacro</depend>

@@ -35,6 +35,16 @@
   <!-- Do we load the VRX sensor suite? -->
   <arg name="vrx_sensors_enabled" default="true" />
 
+  <!-- Enable keyboard control for the WAM-V -->
+  <arg name="keyboard_enabled" default="true" />
+
+  <!-- Dynamic obstacle ship -->
+  <arg name="obstacle_ship_enabled" default="true" />
+  <arg name="obstacle_ship_x" default="-546" />
+  <arg name="obstacle_ship_y" default="211" />
+  <arg name="obstacle_ship_z" default="0" />
+  <arg name="obstacle_ship_yaw" default="-1.530" />
+
   <!-- Start Gazebo with the world file -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name"   value="$(arg world)"/>
@@ -67,7 +77,26 @@
               -R $(arg R) -P $(arg P) -Y $(arg Y)
               -urdf -param $(arg namespace)/robot_description -model wamv"/>
 
+  <!-- Spawn a ship that loops between (-569, 225) and (-567, 176). -->
+  <node if="$(arg obstacle_ship_enabled)" name="spawn_obstacle_ship"
+        pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-sdf -file $(find vrx_gazebo)/models/obstacle_ship/model.sdf
+              -model obstacle_ship
+              -x $(arg obstacle_ship_x)
+              -y $(arg obstacle_ship_y)
+              -z $(arg obstacle_ship_z)
+              -Y $(arg obstacle_ship_yaw)" />
+
   <!-- Pinger visualization -->
   <node name="pinger_visualization" pkg="vrx_gazebo" type="pinger_visualization.py" />
+
+  <!-- Keyboard teleoperation -->
+  <include if="$(arg keyboard_enabled)" file="$(find vrx_gazebo)/launch/usv_keydrive.launch">
+    <arg name="namespace" value="$(arg namespace)" />
+    <arg name="thrust_config" value="$(arg thrust_config)" />
+  </include>
+
+  <node ns="$(arg namespace)" pkg="robot_state_publisher"  type="robot_state_publisher"
+      name="robot_state_publisher"/>
 
 </launch>
