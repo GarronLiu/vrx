@@ -352,6 +352,7 @@ endif()
 
 # Generate world files from xacro and install
 xacro_add_files(
+  worlds/dynamic_channel.world.xacro
   worlds/example_course.world.xacro
   worlds/gymkhana.world.xacro
   worlds/perception_task.world.xacro

@@ -1,0 +1,25 @@
+<launch>
+  <arg name="model_states_topic" default="/gazebo/model_states"/>
+  <arg name="odom_topic" default="/wamv/odom"/>
+  <arg name="model_name" default="wamv"/>
+  <arg name="world_frame" default="world"/>
+  <arg name="child_frame" default="base_link"/>
+  <arg name="publish_tf" default="true"/>
+  <arg name="twist_in_world" default="true"/>
+
+  <node pkg="wamv_utils"
+        type="wamv_state_converter"
+        name="wamv_state_converter"
+        output="screen">
+    <rosparam command="load" file="$(find wamv_utils)/config/wamv_state_converter.yaml"/>
+
+    <!-- Launch arguments override values from the YAML file. -->
+    <param name="model_states_topic" value="$(arg model_states_topic)"/>
+    <param name="odom_topic" value="$(arg odom_topic)"/>
+    <param name="model_name" value="$(arg model_name)"/>
+    <param name="world_frame" value="$(arg world_frame)"/>
+    <param name="child_frame" value="$(arg child_frame)"/>
+    <param name="publish_tf" type="bool" value="$(arg publish_tf)"/>
+    <param name="twist_in_world" type="bool" value="$(arg twist_in_world)"/>
+  </node>
+</launch>

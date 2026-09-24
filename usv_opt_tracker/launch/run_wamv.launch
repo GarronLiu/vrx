@@ -1,0 +1,31 @@
+<launch>
+    <arg name="project" default="usv_opt_tracker"/>
+    <arg name="namespace" default="wamv"/>
+    <arg name="loop_track" default="true"/>
+    <!-- parameter -->
+    <arg name="GPREnable" default="false"/>
+    <param name="/use_sim_time" value="true" /> 
+    <rosparam>
+        ControlFrequency: 20
+        GPUpdateEnable: false
+        OdomRate: 20
+        OdomCutoffFreq: 5.0
+        lambda_learning: 0.001
+    </rosparam>
+    <param name="GPREnable" value="$(arg GPREnable)" /> 
+    <param name="modelName" value="wamv_nominal"/>
+    <param name="loop_track" value="$(arg loop_track)"/>
+    <!-- Running USV tracker Node-->
+    <node pkg="$(arg project)" type="$(arg project)_node" name="$(arg project)_node"
+          output="screen" respawn="true">
+    <remap from="/odom" to="/$(arg namespace)/odom"/>
+    <remap from="/trajectory" to="/manager/trajectory/tracking"/>
+    <remap from="/wamv/thrusters/left_thrust_cmd"
+           to="/$(arg namespace)/thrusters/left_thrust_cmd"/>
+    <remap from="/wamv/thrusters/right_thrust_cmd"
+           to="/$(arg namespace)/thrusters/right_thrust_cmd"/>
+    </node>
+    <node pkg="rviz" type="rviz" name="$(arg project)_rviz" args="-d $(find usv_opt_tracker)/launch/wamv.rviz" />
+    <!-- Dynamic Reconfigure Server -->
+    <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure_server" />
+</launch>

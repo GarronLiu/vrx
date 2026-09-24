@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+<!--
+  Deterministic random static obstacle layer for dynamic_channel_extension.
+  The 10 blocks use robotx_light_buoy_static cells on a 1.8 m grid.
+  Block centers and dimensions were generated with seed 20260901.
+  Poses are local to the extension parent at (-411.75, 269.25, 0)
+  with yaw 0.251397 rad.  All child buoy models are static.
+-->
+<sdf version="1.6">
+  <model name="static_buoy_obstacles">
+    <static>true</static>
+    <!-- block_001: 2 x 2, center (-36.963069, 2.230756), yaw -1.554772 -->
+    <include>
+      <name>block_001_buoy_01</name>
+      <pose>-37.877375 3.116219 0.250000 0 0 -1.554772</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_001_buoy_02</name>
+      <pose>-37.848532 1.316450 0.250000 0 0 -1.554772</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_001_buoy_03</name>
+      <pose>-36.077606 3.145062 0.250000 0 0 -1.554772</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_001_buoy_04</name>
+      <pose>-36.048763 1.345293 0.250000 0 0 -1.554772</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <!-- block_002: 2 x 3, center (-92.087919, -0.885311), yaw 2.024475 -->
+    <include>
+      <name>block_002_buoy_01</name>
+      <pose>-90.075558 -0.905373 0.250000 0 0 2.024475</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_002_buoy_02</name>
+      <pose>-90.864453 0.712541 0.250000 0 0 2.024475</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_002_buoy_03</name>
+      <pose>-91.693471 -1.694268 0.250000 0 0 2.024475</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_002_buoy_04</name>
+      <pose>-92.482367 -0.076354 0.250000 0 0 2.024475</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_002_buoy_05</name>
+      <pose>-93.311385 -2.483163 0.250000 0 0 2.024475</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_002_buoy_06</name>
+      <pose>-94.100280 -0.865249 0.250000 0 0 2.024475</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <!-- block_003: 2 x 2, center (-13.052560, 0.180066), yaw -1.542232 -->
+    <include>
+      <name>block_003_buoy_01</name>
+      <pose>-13.977897 1.053994 0.250000 0 0 -1.542232</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_003_buoy_02</name>
+      <pose>-13.926488 -0.745271 0.250000 0 0 -1.542232</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_003_buoy_03</name>
+      <pose>-12.178632 1.105403 0.250000 0 0 -1.542232</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_003_buoy_04</name>
+      <pose>-12.127223 -0.693862 0.250000 0 0 -1.542232</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <!-- block_004: 3 x 2, center (-0.083300, 9.409602), yaw 0.757723 -->
+    <include>
+      <name>block_004_buoy_01</name>
+      <pose>-0.772283 7.518755 0.250000 0 0 0.757723</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_004_buoy_02</name>
+      <pose>0.535242 8.755839 0.250000 0 0 0.757723</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_004_buoy_03</name>
+      <pose>1.842767 9.992924 0.250000 0 0 0.757723</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_004_buoy_04</name>
+      <pose>-2.009367 8.826280 0.250000 0 0 0.757723</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_004_buoy_05</name>
+      <pose>-0.701842 10.063365 0.250000 0 0 0.757723</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_004_buoy_06</name>
+      <pose>0.605683 11.300449 0.250000 0 0 0.757723</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <!-- block_005: 3 x 3, center (105.031687, 9.712336), yaw 2.157800 -->
+    <include>
+      <name>block_005_buoy_01</name>
+      <pose>107.527338 9.210613 0.250000 0 0 2.157800</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_005_buoy_02</name>
+      <pose>106.530374 10.709300 0.250000 0 0 2.157800</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_005_buoy_03</name>
+      <pose>105.533410 12.207987 0.250000 0 0 2.157800</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_005_buoy_04</name>
+      <pose>106.028651 8.213649 0.250000 0 0 2.157800</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_005_buoy_05</name>
+      <pose>105.031687 9.712336 0.250000 0 0 2.157800</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_005_buoy_06</name>
+      <pose>104.034723 11.211023 0.250000 0 0 2.157800</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_005_buoy_07</name>
+      <pose>104.529964 7.216685 0.250000 0 0 2.157800</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_005_buoy_08</name>
+      <pose>103.533000 8.715372 0.250000 0 0 2.157800</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_005_buoy_09</name>
+      <pose>102.536036 10.214059 0.250000 0 0 2.157800</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <!-- block_006: 3 x 2, center (-107.891793, 6.986731), yaw 2.830683 -->
+    <include>
+      <name>block_006_buoy_01</name>
+      <pose>-105.902760 7.292916 0.250000 0 0 2.830683</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_006_buoy_02</name>
+      <pose>-107.616461 7.843581 0.250000 0 0 2.830683</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_006_buoy_03</name>
+      <pose>-109.330161 8.394246 0.250000 0 0 2.830683</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_006_buoy_04</name>
+      <pose>-106.453425 5.579216 0.250000 0 0 2.830683</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_006_buoy_05</name>
+      <pose>-108.167125 6.129881 0.250000 0 0 2.830683</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_006_buoy_06</name>
+      <pose>-109.880826 6.680546 0.250000 0 0 2.830683</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <!-- block_007: 3 x 3, center (46.840216, -1.538462), yaw -0.753609 -->
+    <include>
+      <name>block_007_buoy_01</name>
+      <pose>44.295918 -1.619370 0.250000 0 0 -0.753609</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_007_buoy_02</name>
+      <pose>45.608521 -2.851065 0.250000 0 0 -0.753609</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_007_buoy_03</name>
+      <pose>46.921124 -4.082760 0.250000 0 0 -0.753609</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_007_buoy_04</name>
+      <pose>45.527613 -0.306767 0.250000 0 0 -0.753609</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_007_buoy_05</name>
+      <pose>46.840216 -1.538462 0.250000 0 0 -0.753609</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_007_buoy_06</name>
+      <pose>48.152819 -2.770157 0.250000 0 0 -0.753609</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_007_buoy_07</name>
+      <pose>46.759308 1.005836 0.250000 0 0 -0.753609</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_007_buoy_08</name>
+      <pose>48.071911 -0.225859 0.250000 0 0 -0.753609</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_007_buoy_09</name>
+      <pose>49.384514 -1.457554 0.250000 0 0 -0.753609</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <!-- block_008: 2 x 2, center (7.810269, -8.085203), yaw 1.760464 -->
+    <include>
+      <name>block_008_buoy_01</name>
+      <pose>8.863809 -8.799384 0.250000 0 0 1.760464</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_008_buoy_02</name>
+      <pose>8.524450 -7.031663 0.250000 0 0 1.760464</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_008_buoy_03</name>
+      <pose>7.096088 -9.138743 0.250000 0 0 1.760464</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_008_buoy_04</name>
+      <pose>6.756729 -7.371022 0.250000 0 0 1.760464</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <!-- block_010: 3 x 2, center (-64.507941, 1.481008), yaw -1.095223 -->
+    <include>
+      <name>block_010_buoy_01</name>
+      <pose>-66.132195 2.669199 0.250000 0 0 -1.095223</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_010_buoy_02</name>
+      <pose>-65.308068 1.068945 0.250000 0 0 -1.095223</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_010_buoy_03</name>
+      <pose>-64.483942 -0.531310 0.250000 0 0 -1.095223</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_010_buoy_04</name>
+      <pose>-64.531940 3.493326 0.250000 0 0 -1.095223</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_010_buoy_05</name>
+      <pose>-63.707814 1.893071 0.250000 0 0 -1.095223</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+    <include>
+      <name>block_010_buoy_06</name>
+      <pose>-62.883687 0.292817 0.250000 0 0 -1.095223</pose>
+      <uri>model://robotx_light_buoy_static</uri>
+    </include>
+  </model>
+</sdf>

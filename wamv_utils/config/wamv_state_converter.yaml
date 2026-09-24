@@ -1,0 +1,27 @@
+# Gazebo ModelStates -> nav_msgs/Odometry configuration.
+
+# Topic containing Gazebo model poses and twists.
+model_states_topic: "/gazebo/model_states"
+
+# Output odometry topic consumed by WAM-V control and visualization nodes.
+odom_topic: "/wamv/odom"
+
+# /gazebo/model_states contains model entries, not arbitrary link entries.
+# For the standard WAM-V Gazebo model, the pose of model "wamv" represents
+# the vehicle base_link pose. Set this to the exact entry in msg.name if your
+# simulation uses a different model name.
+model_name: "wamv"
+
+# World/map frame in which odom.pose.pose is expressed.
+# gazebo_msgs/ModelStates has no header, so configure this explicitly.
+world_frame: "world"
+
+# Child frame associated with odom.twist.twist.
+child_frame: "base_link"
+
+# Publish the same pose as a world_frame -> child_frame TF.
+publish_tf: true
+
+# Gazebo ModelStates twist is assumed to be in the world frame. When true,
+# linear and angular velocity are rotated into child_frame for Odometry.
+twist_in_world: true

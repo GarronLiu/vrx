@@ -51,6 +51,10 @@ namespace gazebo
 ///                 it will still try to reach the very last waypoint.
 /// <force>: Forward force in newtons. Default: 10.
 /// <torque>: Maximum yaw torque in newton-metres. Default: 1.
+/// <max_speed>: Optional forward speed limit in metres per second. Default: 0
+///              (unlimited).
+/// <start_delay>: Optional delay in simulation seconds before movement starts.
+///                Default: 0.
 /// <heading_gain>: Proportional heading gain. When greater than zero, enables
 ///                 stabilized heading control. Default: 0 (legacy control).
 /// <yaw_rate_gain>: Yaw-rate damping gain used by stabilized heading control.
@@ -134,6 +138,15 @@ class FollowPlugin : public ModelPlugin
 
   /// \brief Torque to apply to the model to align it with the next goal.
   private: double torqueToApply = 1;
+
+  /// \brief Optional forward speed limit in metres per second.
+  private: double maxSpeed = 0;
+
+  /// \brief Delay before the model starts moving, in simulation seconds.
+  private: double startDelay = 0;
+
+  /// \brief Simulation time at which the plugin was loaded.
+  private: double loadSimTime = 0;
 
   /// \brief Proportional gain for stabilized heading control.
   private: double headingGain = 0;

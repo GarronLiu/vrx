@@ -1,0 +1,507 @@
+<?xml version="1.0"?>
+<!--
+  Dynamic channel extension with approximately 6 m boundary spacing.
+
+  World-frame corners:
+    entrance: (-545, 203) -> (-553, 265)
+    exit:     (-273, 285) -> (-276, 324)
+
+  Each boundary is sampled at approximately 6 m (24 intervals per
+  half), while the original entrance/middle/exit names are retained.
+  Child poses are local to the parent spawned at (-411.75, 269.25, 0)
+  with yaw 0.251397 rad.
+-->
+<sdf version="1.6">
+  <model name="dynamic_channel_extension">
+    <include>
+      <name>red_extension_entrance</name>
+      <pose>-145.541570 -31.020579 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_001</name>
+      <pose>-139.628070 -30.775570 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_002</name>
+      <pose>-133.714570 -30.530562 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_003</name>
+      <pose>-127.801070 -30.285553 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_004</name>
+      <pose>-121.887569 -30.040544 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_005</name>
+      <pose>-115.974069 -29.795536 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_006</name>
+      <pose>-110.060569 -29.550527 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_007</name>
+      <pose>-104.147069 -29.305518 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_008</name>
+      <pose>-98.233569 -29.060510 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_009</name>
+      <pose>-92.320068 -28.815501 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_010</name>
+      <pose>-86.406568 -28.570492 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_011</name>
+      <pose>-80.493068 -28.325483 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_012</name>
+      <pose>-74.579568 -28.080475 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_013</name>
+      <pose>-68.666068 -27.835466 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_014</name>
+      <pose>-62.752567 -27.590457 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_015</name>
+      <pose>-56.839067 -27.345449 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_016</name>
+      <pose>-50.925567 -27.100440 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_017</name>
+      <pose>-45.012067 -26.855431 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_018</name>
+      <pose>-39.098567 -26.610423 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_019</name>
+      <pose>-33.185066 -26.365414 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_020</name>
+      <pose>-27.271566 -26.120405 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_021</name>
+      <pose>-21.358066 -25.875396 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_022</name>
+      <pose>-15.444566 -25.630388 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_023</name>
+      <pose>-9.531066 -25.385379 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_2</name>
+      <pose>-3.617565 -25.140370 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_024</name>
+      <pose>2.295935 -24.895362 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_025</name>
+      <pose>8.209435 -24.650353 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_026</name>
+      <pose>14.122935 -24.405344 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_027</name>
+      <pose>20.036435 -24.160336 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_028</name>
+      <pose>25.949936 -23.915327 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_029</name>
+      <pose>31.863436 -23.670318 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_030</name>
+      <pose>37.776936 -23.425309 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_031</name>
+      <pose>43.690436 -23.180301 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_032</name>
+      <pose>49.603936 -22.935292 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_033</name>
+      <pose>55.517437 -22.690283 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_034</name>
+      <pose>61.430937 -22.445275 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_035</name>
+      <pose>67.344437 -22.200266 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_036</name>
+      <pose>73.257937 -21.955257 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_037</name>
+      <pose>79.171437 -21.710249 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_038</name>
+      <pose>85.084938 -21.465240 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_039</name>
+      <pose>90.998438 -21.220231 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_040</name>
+      <pose>96.911938 -20.975222 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_041</name>
+      <pose>102.825438 -20.730214 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_042</name>
+      <pose>108.738938 -20.485205 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_043</name>
+      <pose>114.652439 -20.240196 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_044</name>
+      <pose>120.565939 -19.995188 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_045</name>
+      <pose>126.479439 -19.750179 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_dense_046</name>
+      <pose>132.392939 -19.505170 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>red_extension_exit</name>
+      <pose>138.306439 -19.260162 0.000000 0 0 0</pose>
+      <uri>model://surmark950410</uri>
+    </include>
+    <include>
+      <name>green_extension_entrance</name>
+      <pose>-137.867145 31.020562 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_001</name>
+      <pose>-131.971949 30.775554 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_002</name>
+      <pose>-126.076753 30.530546 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_003</name>
+      <pose>-120.181556 30.285538 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_004</name>
+      <pose>-114.286360 30.040530 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_005</name>
+      <pose>-108.391164 29.795522 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_006</name>
+      <pose>-102.495968 29.550514 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_007</name>
+      <pose>-96.600771 29.305506 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_008</name>
+      <pose>-90.705575 29.060498 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_009</name>
+      <pose>-84.810379 28.815490 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_010</name>
+      <pose>-78.915182 28.570482 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_011</name>
+      <pose>-73.019986 28.325474 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_012</name>
+      <pose>-67.124790 28.080466 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_013</name>
+      <pose>-61.229594 27.835458 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_014</name>
+      <pose>-55.334397 27.590450 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_015</name>
+      <pose>-49.439201 27.345442 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_016</name>
+      <pose>-43.544005 27.100434 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_017</name>
+      <pose>-37.648809 26.855426 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_018</name>
+      <pose>-31.753612 26.610418 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_019</name>
+      <pose>-25.858416 26.365410 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_020</name>
+      <pose>-19.963220 26.120402 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_021</name>
+      <pose>-14.068023 25.875394 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_022</name>
+      <pose>-8.172827 25.630386 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_023</name>
+      <pose>-2.277631 25.385378 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_2</name>
+      <pose>3.617565 25.140370 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_024</name>
+      <pose>9.512762 24.895362 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_025</name>
+      <pose>15.407958 24.650354 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_026</name>
+      <pose>21.303154 24.405346 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_027</name>
+      <pose>27.198351 24.160338 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_028</name>
+      <pose>33.093547 23.915330 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_029</name>
+      <pose>38.988743 23.670322 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_030</name>
+      <pose>44.883939 23.425314 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_031</name>
+      <pose>50.779136 23.180306 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_032</name>
+      <pose>56.674332 22.935298 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_033</name>
+      <pose>62.569528 22.690290 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_034</name>
+      <pose>68.464724 22.445282 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_035</name>
+      <pose>74.359921 22.200274 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_036</name>
+      <pose>80.255117 21.955266 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_037</name>
+      <pose>86.150313 21.710258 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_038</name>
+      <pose>92.045510 21.465250 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_039</name>
+      <pose>97.940706 21.220243 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_040</name>
+      <pose>103.835902 20.975235 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_041</name>
+      <pose>109.731098 20.730227 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_042</name>
+      <pose>115.626295 20.485219 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_043</name>
+      <pose>121.521491 20.240211 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_044</name>
+      <pose>127.416687 19.995203 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_045</name>
+      <pose>133.311884 19.750195 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_dense_046</name>
+      <pose>139.207080 19.505187 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+    <include>
+      <name>green_extension_exit</name>
+      <pose>145.102276 19.260179 0.200000 0 0 0</pose>
+      <uri>model://surmark950400</uri>
+    </include>
+  </model>
+</sdf>

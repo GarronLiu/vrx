@@ -1,0 +1,73 @@
+trackingCost
+{
+    name "tracking cost quadratic"
+    kind "quadratic"   
+    type 0              ; 0 = intermediate, 1 = final
+
+    weights
+    {
+      Q
+      {
+        scaling 50.0
+        (0,0) 20
+        (1,1) 20
+        (2,2) 0
+        (3,3) 0
+        (4,4) 0
+        (5,5) 0
+        (6,6) 0
+        (7,7) 0
+        ; Force states are in N.  These weights preserve the former
+        ; normalized-command penalty using a 250 N characteristic scale.
+        (8,8) 0.00008
+        (9,9) 0.00008
+      }
+      R
+      {
+        scaling 50.0
+        ; NMPC controls are thrust-force rates in N/s.
+        (0,0) 0.000016
+        (1,1) 0.000016
+      }
+    }
+}
+
+
+finalCost
+{
+    name "final cost quadratic"
+    kind "quadratic"   
+    type 1              ; 0 = intermediate, 1 = final
+
+    weights
+    {
+      Q
+      {
+        scaling 10.0
+        (0,0) 20
+        (1,1) 20
+        (2,2) 0
+        (3,3) 0
+        (4,4) 0
+        (5,5) 2
+        (6,6) 0
+        (7,7) 0
+        (8,8) 0.00008
+        (9,9) 0.00008
+      }
+      R
+      {
+        scaling 20.0
+        (0,0) 0.000016
+        (1,1) 0.000016
+      }
+      x_des
+      {  
+        (0,0) 1
+        (1,0) 0
+        (2,0) 0
+        (3,0) 0
+        (4,0) 0
+      }
+    }
+}

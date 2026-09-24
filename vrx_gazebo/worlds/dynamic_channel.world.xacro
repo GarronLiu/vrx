@@ -1,0 +1,182 @@
+<?xml version="1.0" ?>
+<!--
+  Reproducible dynamic-channel world reconstructed from
+  dynamic_channel_saved.world.
+
+  The Gazebo <state> snapshot and the saved WAM-V are intentionally omitted:
+  runtime state does not belong in a reusable world, and the WAM-V is spawned
+  by vrx.launch. Channel geometry, static obstacles, and all nine obstacle
+  ships are part of this world.
+-->
+<sdf version="1.6" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="dynamic_obstacle_ship"
+               params="name x y yaw
+                       waypoint_1_x waypoint_1_y
+                       waypoint_2_x waypoint_2_y max_speed">
+    <model name="${name}">
+      <static>false</static>
+      <pose>${x} ${y} 0.0 0.0 0.0 ${yaw}</pose>
+
+      <link name="link">
+        <inertial>
+          <pose>0 0 -0.45 0 0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>13</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>30</iyy>
+            <iyz>0</iyz>
+            <izz>35</izz>
+          </inertia>
+        </inertial>
+
+        <collision name="obstacle_ship_collision">
+          <pose>0 0 0.416 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>5.494 3.456 2.032</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="obstacle_ship_visual">
+          <pose>-0.748 -0.728 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://obstacle_ship/meshes/ROS_SHIP.dae</uri>
+              <scale>2 2 2</scale>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+
+      <plugin name="${name}_buoyancy" filename="libbuoyancy_gazebo_plugin.so">
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>20.0</angular_drag>
+        <buoyancy name="front_port">
+          <link_name>link</link_name>
+          <pose>1.8 1.0 -0.10 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+        </buoyancy>
+        <buoyancy name="front_starboard">
+          <link_name>link</link_name>
+          <pose>1.8 -1.0 -0.10 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+        </buoyancy>
+        <buoyancy name="rear_port">
+          <link_name>link</link_name>
+          <pose>-1.8 1.0 -0.10 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+        </buoyancy>
+        <buoyancy name="rear_starboard">
+          <link_name>link</link_name>
+          <pose>-1.8 -1.0 -0.10 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+        </buoyancy>
+      </plugin>
+
+      <plugin name="${name}_follow" filename="libfollow_plugin.so">
+        <link_name>link</link_name>
+        <loop_forever>true</loop_forever>
+        <force>400.0</force>
+        <torque>80.0</torque>
+        <max_speed>${max_speed}</max_speed>
+        <start_delay>0.0</start_delay>
+        <heading_gain>10</heading_gain>
+        <yaw_rate_gain>12</yaw_rate_gain>
+        <forward_bearing_limit>50</forward_bearing_limit>
+        <range_tolerance>1.0</range_tolerance>
+        <waypoints>
+          <waypoint>${waypoint_1_x} ${waypoint_1_y}</waypoint>
+          <waypoint>${waypoint_2_x} ${waypoint_2_y}</waypoint>
+        </waypoints>
+      </plugin>
+    </model>
+  </xacro:macro>
+
+  <world name="robotx_example_course">
+    <!-- Base Sydney Regatta environment. -->
+    <xacro:include filename="$(find vrx_gazebo)/worlds/sydneyregatta.xacro" />
+    <xacro:sydneyregatta />
+
+    <!-- Ocean surface and wave field. -->
+    <xacro:include filename="$(find wave_gazebo)/world_models/ocean_waves/model.xacro" />
+    <xacro:ocean_waves scale="2.5" />
+
+    <!-- Wind acts on the WAM-V spawned later by vrx.launch. -->
+    <xacro:include filename="$(find vrx_gazebo)/worlds/xacros/usv_wind_plugin.xacro" />
+    <xacro:usv_wind_gazebo>
+      <wind_objs>
+        <wind_obj>
+          <name>wamv</name>
+          <link_name>wamv/base_link</link_name>
+          <coeff_vector>.5 .5 .33</coeff_vector>
+        </wind_obj>
+      </wind_objs>
+    </xacro:usv_wind_gazebo>
+
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic" />
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <!-- Static task objects retained from the saved world. -->
+    <include>
+      <uri>model://dock_2022</uri>
+      <pose>-262 298 0 0 0 0</pose>
+    </include>
+
+    <!-- Channel boundary and deterministic static-obstacle layer. -->
+    <include>
+      <name>dynamic_channel_extension</name>
+      <uri>model://dynamic_channel_extension</uri>
+      <pose>-411.75 269.25 0 0 0 0.251397</pose>
+    </include>
+
+    <!-- Moving ships reconstructed from the top-level models in the saved world. -->
+    <xacro:dynamic_obstacle_ship
+      name="obstacleship01" x="-565.769" y="218.174" yaw="2.572"
+      waypoint_1_x="-565.769" waypoint_1_y="218.174"
+      waypoint_2_x="-521.512" waypoint_2_y="220.285" max_speed="2.0" />
+    <xacro:dynamic_obstacle_ship
+      name="obstacleship02" x="-503.816" y="257.276" yaw="2.15381"
+      waypoint_1_x="-531.115" waypoint_1_y="249.903"
+      waypoint_2_x="-511.000" waypoint_2_y="226.000" max_speed="1.40" />
+    <xacro:dynamic_obstacle_ship
+      name="obstacleship03" x="-491.492" y="264.225" yaw="2.572"
+      waypoint_1_x="-491.492" waypoint_1_y="264.225"
+      waypoint_2_x="-494.595" waypoint_2_y="225.95" max_speed="1.5" />
+    <xacro:dynamic_obstacle_ship
+      name="obstacleship04" x="-471.479" y="234.717" yaw="-2.1011"
+      waypoint_1_x="-471.479" waypoint_1_y="234.717"
+      waypoint_2_x="-481.617" waypoint_2_y="264.937" max_speed="2.00" />
+    <xacro:dynamic_obstacle_ship
+      name="obstacleship05" x="-436.591" y="272.588" yaw="-2.14"
+      waypoint_1_x="-436.591" waypoint_1_y="272.588"
+      waypoint_2_x="-456.041" waypoint_2_y="238.826" max_speed="2.0" />
+    <xacro:dynamic_obstacle_ship
+      name="obstacleship06" x="--397.135681" y="253.937500" yaw="1.002"
+      waypoint_1_x="-397.135681" waypoint_1_y="253.937500"
+      waypoint_2_x="-442.963165" waypoint_2_y="240.660507" max_speed="1.5" />
+    <xacro:dynamic_obstacle_ship
+      name="obstacleship07" x="-372.500214" y="291.727112" yaw="-2.1011"
+      waypoint_1_x="-372.500214" waypoint_1_y="291.727112"
+      waypoint_2_x="-384.390808" waypoint_2_y="257.289154" max_speed="2.0" />
+    <xacro:dynamic_obstacle_ship
+      name="obstacleship08" x="-367.958" y="264.721" yaw="-2.86648"
+      waypoint_1_x="-367.958" waypoint_1_y="264.721"
+      waypoint_2_x="-337.637390" waypoint_2_y="286.290588" max_speed="1.50" />
+    <xacro:dynamic_obstacle_ship
+      name="obstacleship09" x="-300.75" y="310.818665" yaw="-1.610784"
+      waypoint_1_x="-300.75" waypoint_1_y="310.818665"
+      waypoint_2_x="-304.17" waypoint_2_y="280.605988" max_speed="1.5" />
+  </world>
+</sdf>

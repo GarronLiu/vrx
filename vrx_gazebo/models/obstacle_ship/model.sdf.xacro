@@ -1,0 +1,110 @@
+<?xml version="1.0" ?>
+<!--
+  Parameterized dynamic obstacle ship.
+
+  This file is intentionally separate from model.sdf.  model.sdf remains the
+  default single-ship model used by the original vrx.launch, while this xacro
+  is expanded by dynamic_channel.launch to give every test actor its own
+  initial pose and waypoint list.
+-->
+<sdf version="1.6" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="model_name" default="dynamic_obstacle_ship"/>
+  <xacro:arg name="initial_x" default="0.0"/>
+  <xacro:arg name="initial_y" default="0.0"/>
+  <xacro:arg name="initial_z" default="0.0"/>
+  <xacro:arg name="initial_yaw" default="0.0"/>
+  <xacro:arg name="waypoint_1_x" default="0.0"/>
+  <xacro:arg name="waypoint_1_y" default="0.0"/>
+  <xacro:arg name="waypoint_2_x" default="10.0"/>
+  <xacro:arg name="waypoint_2_y" default="0.0"/>
+  <xacro:arg name="force" default="300.0"/>
+  <xacro:arg name="torque" default="80.0"/>
+  <xacro:arg name="max_speed" default="1.0"/>
+  <xacro:arg name="start_delay" default="0.0"/>
+
+  <model name="$(arg model_name)">
+    <static>false</static>
+    <pose>$(arg initial_x) $(arg initial_y) $(arg initial_z) 0 0 $(arg initial_yaw)</pose>
+
+    <link name="link">
+      <inertial>
+        <pose>0 0 -0.45 0 0 0</pose>
+        <mass>20</mass>
+        <inertia>
+          <ixx>26.784</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>57.192</iyy>
+          <iyz>0</iyz>
+          <izz>70.208</izz>
+        </inertia>
+      </inertial>
+
+      <!-- The collision footprint is deliberately the same inflated footprint
+           as the checked-in obstacle_ship model used by the LiDAR. -->
+      <collision name="obstacle_ship_collision">
+        <pose>0 0 0.416 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>5.494 3.456 2.032</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="obstacle_ship_visual">
+        <pose>-0.748 -0.728 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://obstacle_ship/meshes/ROS_SHIP.dae</uri>
+            <scale>2 2 2</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <plugin name="$(arg model_name)_buoyancy" filename="libbuoyancy_gazebo_plugin.so">
+      <wave_model>ocean_waves</wave_model>
+      <fluid_density>1000</fluid_density>
+      <fluid_level>0.0</fluid_level>
+      <linear_drag>25.0</linear_drag>
+      <angular_drag>20.0</angular_drag>
+      <buoyancy name="front_port">
+        <link_name>link</link_name>
+        <pose>1.8 1.0 -0.05 0 0 0</pose>
+        <geometry><sphere><radius>0.25</radius></sphere></geometry>
+      </buoyancy>
+      <buoyancy name="front_starboard">
+        <link_name>link</link_name>
+        <pose>1.8 -1.0 -0.05 0 0 0</pose>
+        <geometry><sphere><radius>0.25</radius></sphere></geometry>
+      </buoyancy>
+      <buoyancy name="rear_port">
+        <link_name>link</link_name>
+        <pose>-1.8 1.0 -0.05 0 0 0</pose>
+        <geometry><sphere><radius>0.25</radius></sphere></geometry>
+      </buoyancy>
+      <buoyancy name="rear_starboard">
+        <link_name>link</link_name>
+        <pose>-1.8 -1.0 -0.05 0 0 0</pose>
+        <geometry><sphere><radius>0.25</radius></sphere></geometry>
+      </buoyancy>
+    </plugin>
+
+    <plugin name="$(arg model_name)_follow" filename="libfollow_plugin.so">
+      <link_name>link</link_name>
+      <loop_forever>true</loop_forever>
+      <force>$(arg force)</force>
+      <torque>$(arg torque)</torque>
+      <max_speed>$(arg max_speed)</max_speed>
+      <start_delay>$(arg start_delay)</start_delay>
+      <heading_gain>10</heading_gain>
+      <yaw_rate_gain>12</yaw_rate_gain>
+      <forward_bearing_limit>50</forward_bearing_limit>
+      <range_tolerance>1.0</range_tolerance>
+      <waypoints>
+        <waypoint>$(arg waypoint_1_x) $(arg waypoint_1_y)</waypoint>
+        <waypoint>$(arg waypoint_2_x) $(arg waypoint_2_y)</waypoint>
+      </waypoints>
+    </plugin>
+  </model>
+</sdf>

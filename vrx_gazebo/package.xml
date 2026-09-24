@@ -26,6 +26,7 @@
   <depend>std_msgs</depend>
   <exec_depend>teleop_twist_keyboard</exec_depend>
   <depend>wamv_gazebo</depend>
+  <exec_depend>wamv_utils</exec_depend>
   <depend>wave_gazebo</depend>
   <depend>xacro</depend>
   <export>

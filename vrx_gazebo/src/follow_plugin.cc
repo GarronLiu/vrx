@@ -36,6 +36,7 @@ void FollowPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
 {
   GZ_ASSERT(_model != nullptr, "Received NULL model pointer");
   this->model = _model;
+  this->loadSimTime = this->model->GetWorld()->SimTime().Double();
   #if GAZEBO_MAJOR_VERSION >= 8
     this->modelPose = model->WorldPose();
   #else
@@ -164,6 +165,12 @@ void FollowPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   if (_sdf->HasElement("torque"))
     this->torqueToApply = _sdf->Get<double>("torque");
 
+  if (_sdf->HasElement("max_speed"))
+    this->maxSpeed = _sdf->Get<double>("max_speed");
+
+  if (_sdf->HasElement("start_delay"))
+    this->startDelay = _sdf->Get<double>("start_delay");
+
   if (_sdf->HasElement("heading_gain"))
     this->headingGain = _sdf->Get<double>("heading_gain");
 
@@ -222,6 +229,13 @@ void FollowPlugin::Update()
   if (this->localWaypoints.empty())
     return;
 
+  // Keep all scenario actors deterministic by delaying their motion in
+  // simulation time rather than relying on wall-clock launch timing.
+  if (this->startDelay > 0 &&
+      this->model->GetWorld()->SimTime().Double() - this->loadSimTime <
+      this->startDelay)
+    return;
+
   // Direction vector to the goal from the model. Waypoints describe a path
   // on the water surface, so heave must not affect waypoint arrival.
 #if GAZEBO_MAJOR_VERSION >= 8
@@ -277,7 +291,20 @@ void FollowPlugin::Update()
     const double bearingDegrees = std::abs(bearing.Degree());
     if (bearingDegrees <= this->forwardBearingLimit)
     {
-      const double forceScale = std::max(0.0, std::cos(bearingRadians));
+      double forceScale = std::max(0.0, std::cos(bearingRadians));
+      if (this->maxSpeed > 0)
+      {
+#if GAZEBO_MAJOR_VERSION >= 8
+        const auto localVelocity = pose.Rot().RotateVectorReverse(
+          this->link->WorldLinearVel());
+#else
+        const auto localVelocity = pose.Rot().RotateVectorReverse(
+          this->link->GetWorldLinearVel().Ign());
+#endif
+        forceScale *= std::max(0.0,
+          std::min(1.0, (this->maxSpeed - localVelocity.X()) /
+            this->maxSpeed));
+      }
       this->link->AddLinkForce({this->forceToApply * forceScale, 0, 0});
     }
 
@@ -295,7 +322,20 @@ void FollowPlugin::Update()
   }
 
   // Legacy control used by existing animal buoy models.
-  this->link->AddLinkForce({this->forceToApply, 0, 0});
+  double forceScale = 1.0;
+  if (this->maxSpeed > 0)
+  {
+#if GAZEBO_MAJOR_VERSION >= 8
+    const auto localVelocity = pose.Rot().RotateVectorReverse(
+      this->link->WorldLinearVel());
+#else
+    const auto localVelocity = pose.Rot().RotateVectorReverse(
+      this->link->GetWorldLinearVel().Ign());
+#endif
+    forceScale = std::max(0.0,
+      std::min(1.0, (this->maxSpeed - localVelocity.X()) / this->maxSpeed));
+  }
+  this->link->AddLinkForce({this->forceToApply * forceScale, 0, 0});
 
   if (bearing.Degree() > this->bearingGoal)
     this->link->AddRelativeTorque({0, 0, this->torqueToApply});

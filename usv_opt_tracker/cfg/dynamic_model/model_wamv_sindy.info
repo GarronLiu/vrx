@@ -1,0 +1,55 @@
+USVParameters
+{
+  Xu                -0.1586
+  Xu_absu   -0.0939
+  Xvr              0.5859
+  Xrr               0.1714
+  Yv                -0.0851
+  Yr                0.0145
+  Yv_absv    -0.0085
+  Yr_absr     -0.1418
+  Yuv             -0.0078
+  Yur              -1.0014
+  Yabsv_r         -0.0138
+  Yv_absr         -0.0694
+  Mv               0.1787
+  Mr               0.0770
+  Mv_absv  -0.0320
+  Mr_absr   -0.6022
+  Muv            -0.0262
+  Mur            -0.0081
+  Mabsv_r       -0.0654
+  Mv_absr       -0.2661
+  ; WAM-V rigid body and aft-thruster locations from the VRX URDF.
+  mass              180.0
+  yawInertia        446.0
+  leftThrusterY     1.027135
+  rightThrusterY   -1.027135
+
+  ; mappingType=1 parameters from usv_gazebo_thrust_plugin.
+  maxThrustCmd      1.0
+  maxForceFwd       250.0
+  maxForceRev      -100.0
+  thrustCmdThreshold 0.01
+  forwardGlfA       0.01
+  forwardGlfK       59.82
+  forwardGlfB       5.0
+  forwardGlfV       0.38
+  forwardGlfC       0.56
+  forwardGlfM       0.28
+  reverseGlfA      -199.13
+  reverseGlfK      -0.09
+  reverseGlfB       8.84
+  reverseGlfV       5.34
+  reverseGlfC       0.99
+  reverseGlfM      -0.57
+
+  ; NMPC states 8/9 are physical aft-thruster forces [N], and its two
+  ; controls are thrust-force rates [N/s].
+  minInput -100.0
+  maxInput 242.6658665
+  maxInputRate 3000.0
+  maxSurgeSpeed 3.0
+  minSurgeSpeed -0.5
+  maxAngularSpeed 3.14
+}

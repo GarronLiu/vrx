@@ -1,0 +1,61 @@
+USVParameters
+{
+  ; Planar WAM-V dynamics for the default vrx.launch configuration:
+  ; T thruster layout with the complete VRX sensor suite enabled.
+  ; The generated URDF has m = 298.785 kg and Iz = 691.126 kg m^2.
+  ; Xu = -51.3/m, Xu_absu = -72.4/m, Yv = -40/m, Mr = -400/Iz.
+  ; Xvr and Yur are the rigid-body Coriolis terms in u_dot and v_dot.
+  Xu                -0.1716953662
+  Xu_absu           -0.2423147079
+  Xvr              1.0
+  Xrr               0.0
+  Yv                -0.1338755292
+  Yr                0.0
+  Yv_absv    0.0
+  Yr_absr     0.0
+  Yuv             0.0
+  Yur              -1.0
+  Yabsv_r         0.0
+  Yv_absr         0.0
+  Mv               0.0
+  Mr               -0.5787656665
+  Mv_absv  0.0
+  Mr_absr   0.0
+  Muv            0.0
+  Mur            0.0
+  Mabsv_r       0.0
+  Mv_absr       0.0
+  ; Aggregate WAM-V inertia and aft-thruster locations from the generated URDF.
+  mass              298.785
+  yawInertia        691.126
+  leftThrusterY     1.027135
+  rightThrusterY   -1.027135
+
+  ; mappingType=1 parameters from usv_gazebo_thrust_plugin.
+  maxThrustCmd      1.0
+  maxForceFwd       250.0
+  maxForceRev      -100.0
+  thrustCmdThreshold 0.01
+  forwardGlfA       0.01
+  forwardGlfK       59.82
+  forwardGlfB       5.0
+  forwardGlfV       0.38
+  forwardGlfC       0.56
+  forwardGlfM       0.28
+  reverseGlfA      -199.13
+  reverseGlfK      -0.09
+  reverseGlfB       8.84
+  reverseGlfV       5.34
+  reverseGlfC       0.99
+  reverseGlfM      -0.57
+
+  ; NMPC states 8/9 are physical aft-thruster forces [N], and its two
+  ; controls are thrust-force rates [N/s].  The forward limit is GLF(1.0),
+  ; because commands published to VRX are constrained to [-1, 1].
+  minInput -100.0
+  maxInput 242.6658665
+  maxInputRate 1000.0
+  maxSurgeSpeed 3.0
+  minSurgeSpeed -0.5
+  maxAngularSpeed 3.14
+}
